@@ -83,14 +83,13 @@ while (number != 0)
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    var b = 1
-    var a = 0
-    var sum = a + b
-    if (n < 3) return 1
-    else for (i in 3..n) {
-        sum += b
-        a += b
-        b = sum - b
+    var fib1 = 1
+    var sum = 1
+    if(n < 3) return 1
+    else for (i in 3..n)
+{
+        sum += fib1
+        fib1 = sum - fib1
     }
     return sum
 }
