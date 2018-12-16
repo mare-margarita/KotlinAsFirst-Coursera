@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED_PARAMETER")
 package lesson3.task1
-
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
@@ -38,7 +38,7 @@ fun isPrime(n: Int): Boolean {
  */
 fun isPerfect(n: Int): Boolean {
     var sum = 1
-    for (m in 2..n/2) {
+    for (m in 2..n / 2) {
         if (n % m > 0) continue
         sum += m
         if (sum > n) break
@@ -66,15 +66,34 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
-
+fun digitNumber(n: Int): Int {
+    var count = 0
+    var number = n
+    do {
+        count++
+        number /= 10
+    }
+while (number != 0)
+    return count
+}
 /**
  * Простая
  *
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var b = 1
+    var a = 0
+    var sum = a + b
+    if (n < 3) return 1
+    else for (i in 3..n) {
+        sum += b
+        a += b
+        b = sum - b
+    }
+    return sum
+}
 
 /**
  * Простая
@@ -159,7 +178,15 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var number = n
+    var numberRevert = 0
+    while (number != 0) {
+        numberRevert = numberRevert * 10 + number % 10
+        number /= 10
+    }
+    return numberRevert
+}
 
 /**
  * Средняя
@@ -170,7 +197,17 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    // Палиндро́м, пе́ревертень — число, буквосочетание,
+    // слово или текст, одинаково читающееся в обоих направлениях.
+    var number = n
+    var numberRevert = 0
+    while (number > 0) {
+        numberRevert = numberRevert * 10 + number % 10
+        number /= 10
+    }
+    return numberRevert == n
+}
 
 /**
  * Средняя
@@ -191,7 +228,27 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var count = 0
+    var number = 0
+    var numberConst = 0
+    var countResult = 0
+    for (i in 1..n)
+{
+        number += i * i
+        numberConst = i * i
+        while (number > 0) {
+            count += 1
+            number /= 10
+        }
+        while (count > 0) {
+            count -= 1
+            countResult += 1
+            if (countResult == n) return ((numberConst / (10.0.pow(count)).toInt()) % 10)
+        }
+    }
+    return ((numberConst / (10.0.pow(count)).toInt()) % 10)
+}
 
 /**
  * Сложная
@@ -202,4 +259,30 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var firstFib = 1
+    var sum = 0
+    var count = 0
+    var number = 0
+    var numberConst = 0
+    var countResult = 0
+    for (i in 1..n)
+{
+        // фиб 1 - это фиб 1, фиб 2 - это сумма
+        sum += firstFib
+        number += sum
+        numberConst = sum
+        firstFib = sum - firstFib
+        while (number > 0) {
+            count += 1
+            number /= 10
+        }
+        while (count > 0) {
+            count -= 1
+            countResult += 1
+            if (countResult == n) return ((numberConst / (10.0.pow(count)).toInt()) % 10)
+        }
+    }
+    return ((numberConst / (10.0.pow(count)).toInt()) % 10)
+}
+
